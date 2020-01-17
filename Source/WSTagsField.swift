@@ -205,7 +205,7 @@ open class WSTagsField: UIScrollView {
     }
 
     open fileprivate(set) var tags = [WSTag]()
-    internal var tagViews = [WSTagView]()
+    private var tagViews = [WSTagView]()
 
     // MARK: - Events
 
