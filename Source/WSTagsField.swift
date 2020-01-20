@@ -205,7 +205,7 @@ public struct WSTagAcceptOption: OptionSet {
     }
 
     open fileprivate(set) var tags = [WSTag]()
-    public var tagViews = [WSTagView]()
+    @objc open var tagViews = [WSTagView]()
 
     // MARK: - Events
 
