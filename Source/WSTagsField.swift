@@ -25,96 +25,96 @@ public struct WSTagAcceptOption: OptionSet {
     fileprivate let textField = BackspaceDetectingTextField()
 
     /// Dedicated text field delegate.
-    open weak var textDelegate: UITextFieldDelegate?
+    @objc open weak var textDelegate: UITextFieldDelegate?
 
     /// Background color for tag view in normal (non-selected) state.
-    open override var tintColor: UIColor! {
+    @objc open override var tintColor: UIColor! {
         didSet {
             tagViews.forEach { $0.tintColor = self.tintColor }
         }
     }
 
     /// Text color for tag view in normal (non-selected) state.
-    open var textColor: UIColor? {
+    @objc open var textColor: UIColor? {
         didSet {
             tagViews.forEach { $0.textColor = self.textColor }
         }
     }
 
     /// Background color for tag view in normal (selected) state.
-    open var selectedColor: UIColor? {
+    @objc open var selectedColor: UIColor? {
         didSet {
             tagViews.forEach { $0.selectedColor = self.selectedColor }
         }
     }
 
     /// Text color for tag view in normal (selected) state.
-    open var selectedTextColor: UIColor? {
+    @objc open var selectedTextColor: UIColor? {
         didSet {
             tagViews.forEach { $0.selectedTextColor = self.selectedTextColor }
         }
     }
 
-    open var delimiter: String = "" {
+    @objc open var delimiter: String = "" {
         didSet {
             tagViews.forEach { $0.displayDelimiter = self.isDelimiterVisible ? self.delimiter : "" }
         }
     }
 
-    open var isDelimiterVisible: Bool = false {
+    @objc open var isDelimiterVisible: Bool = false {
         didSet {
             tagViews.forEach { $0.displayDelimiter = self.isDelimiterVisible ? self.delimiter : "" }
         }
     }
 
-    open var maxHeight: CGFloat = CGFloat.infinity {
+    @objc open var maxHeight: CGFloat = CGFloat.infinity {
         didSet {
             tagViews.forEach { $0.displayDelimiter = self.isDelimiterVisible ? self.delimiter : "" }
         }
     }
 
     /// Max number of lines of tags can display in WSTagsField before its contents become scrollable. Default value is 0, which means WSTagsField always resize to fit all tags.
-    open var numberOfLines: Int = 0 {
+    @objc open var numberOfLines: Int = 0 {
         didSet {
             repositionViews()
         }
     }
 
     /// Whether or not the WSTagsField should become scrollable
-    open var enableScrolling: Bool = true
+    @objc open var enableScrolling: Bool = true
 
-    open var cornerRadius: CGFloat = 3.0 {
+    @objc open var cornerRadius: CGFloat = 3.0 {
         didSet {
             tagViews.forEach { $0.cornerRadius = self.cornerRadius }
         }
     }
 
-    open var borderWidth: CGFloat = 0.0 {
+    @objc open var borderWidth: CGFloat = 0.0 {
         didSet {
             tagViews.forEach { $0.borderWidth = self.borderWidth }
         }
     }
 
-    open var borderColor: UIColor? {
+    @objc open var borderColor: UIColor? {
         didSet {
             if let borderColor = borderColor { tagViews.forEach { $0.borderColor = borderColor } }
         }
     }
 
-    open override var layoutMargins: UIEdgeInsets {
+    @objc open override var layoutMargins: UIEdgeInsets {
         didSet {
             tagViews.forEach { $0.layoutMargins = self.layoutMargins }
         }
     }
 
-    open var fieldTextColor: UIColor? {
+    @objc open var fieldTextColor: UIColor? {
         didSet {
             textField.textColor = fieldTextColor
         }
     }
 
     @available(iOS 10.0, *)
-    open var fieldTextContentType: UITextContentType! {
+    @objc open var fieldTextContentType: UITextContentType! {
         set {
             textField.textContentType = newValue
         }
@@ -123,38 +123,38 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open var placeholder: String = "Tags" {
+    @objc open var placeholder: String = "Tags" {
         didSet {
             updatePlaceholderTextVisibility()
         }
     }
 
-    open var placeholderColor: UIColor? {
+    @objc open var placeholderColor: UIColor? {
         didSet {
             updatePlaceholderTextVisibility()
         }
     }
 
-    open var placeholderFont: UIFont? {
+    @objc open var placeholderFont: UIFont? {
         didSet {
             updatePlaceholderTextVisibility()
         }
     }
 
-    open var placeholderAlwaysVisible: Bool = false {
+    @objc open var placeholderAlwaysVisible: Bool = false {
         didSet {
             updatePlaceholderTextVisibility()
         }
     }
 
-    open var font: UIFont? {
+    @objc open var font: UIFont? {
         didSet {
             textField.font = font
             tagViews.forEach { $0.font = self.font }
         }
     }
 
-    open var keyboardAppearance: UIKeyboardAppearance = .default {
+    @objc open var keyboardAppearance: UIKeyboardAppearance = .default {
         didSet {
             textField.keyboardAppearance = self.keyboardAppearance
             tagViews.forEach {
@@ -163,7 +163,7 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open var readOnly: Bool = false {
+    @objc open var readOnly: Bool = false {
         didSet {
             unselectAllTagViewsAnimated()
             textField.isEnabled = !readOnly
@@ -174,25 +174,25 @@ public struct WSTagAcceptOption: OptionSet {
     /// By default, the return key is used to create a tag in the field. You can change it, i.e., to use comma or space key instead.
     open var acceptTagOption: WSTagAcceptOption = .return
 
-    open override var contentInset: UIEdgeInsets {
+    @objc open override var contentInset: UIEdgeInsets {
         didSet {
             repositionViews()
         }
     }
 
-    open var spaceBetweenTags: CGFloat = 2.0 {
+    @objc open var spaceBetweenTags: CGFloat = 2.0 {
         didSet {
             repositionViews()
         }
     }
 
-    open var spaceBetweenLines: CGFloat = 2.0 {
+    @objc open var spaceBetweenLines: CGFloat = 2.0 {
         didSet {
             repositionViews()
         }
     }
 
-    open override var isFirstResponder: Bool {
+    @objc open override var isFirstResponder: Bool {
         guard super.isFirstResponder == false, textField.isFirstResponder == false else {
             return true
         }
@@ -210,10 +210,10 @@ public struct WSTagAcceptOption: OptionSet {
     // MARK: - Events
 
     /// Called when the text field should return.
-    open var onShouldAcceptTag: ((WSTagsField) -> Bool)?
+    @objc open var onShouldAcceptTag: ((WSTagsField) -> Bool)?
 
     /// Called when the text field text has changed. You should update your autocompleting UI based on the text supplied.
-    open var onDidChangeText: ((WSTagsField, _ text: String?) -> Void)?
+    @objc open var onDidChangeText: ((WSTagsField, _ text: String?) -> Void)?
 
     /// Called when a tag has been added. You should use this opportunity to update your local list of selected items.
     open var onDidAddTag: ((WSTagsField, _ tag: WSTag) -> Void)?
@@ -222,10 +222,10 @@ public struct WSTagAcceptOption: OptionSet {
     open var onDidRemoveTag: ((WSTagsField, _ tag: WSTag) -> Void)?
 
     /// Called when a tag has been selected.
-    open var onDidSelectTagView: ((WSTagsField, _ tag: WSTagView) -> Void)?
+    @objc open var onDidSelectTagView: ((WSTagsField, _ tag: WSTagView) -> Void)?
 
     /// Called when a tag has been unselected.
-    open var onDidUnselectTagView: ((WSTagsField, _ tag: WSTagView) -> Void)?
+    @objc open var onDidUnselectTagView: ((WSTagsField, _ tag: WSTagView) -> Void)?
 
     /// Called before a tag is added to the tag list. Here you return false to discard tags you do not want to allow.
     open var onValidateTag: ((WSTag, [WSTag]) -> Bool)?
@@ -235,14 +235,14 @@ public struct WSTagAcceptOption: OptionSet {
      * @return A Tag for a match (typically the first item in the matching results),
      * or nil if the text shouldn't be accepted.
      */
-    open var onVerifyTag: ((WSTagsField, _ text: String) -> Bool)?
+    @objc open var onVerifyTag: ((WSTagsField, _ text: String) -> Bool)?
 
     /**
      * Called when the view has updated its own height. If you are
      * not using Autolayout, you should use this method to update the
      * frames to make sure the tag view still fits.
      */
-    open var onDidChangeHeightTo: ((WSTagsField, _ height: CGFloat) -> Void)?
+    @objc open var onDidChangeHeightTo: ((WSTagsField, _ height: CGFloat) -> Void)?
 
     // MARK: - Properties
 
@@ -274,16 +274,16 @@ public struct WSTagAcceptOption: OptionSet {
         return 200 //default estimation
     }
 
-    open var preferredMaxLayoutWidth: CGFloat {
+    @objc open var preferredMaxLayoutWidth: CGFloat {
         return bounds.width == 0 ? estimatedInitialMaxLayoutWidth : bounds.width
     }
 
-    open override var intrinsicContentSize: CGSize {
+    @objc open override var intrinsicContentSize: CGSize {
         return CGSize(width: self.frame.size.width,
                       height: min(maxHeight, maxHeightBasedOnNumberOfLines, calculateContentHeight(layoutWidth: preferredMaxLayoutWidth) + contentInset.top + contentInset.bottom))
     }
 
-    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+    @objc open override func sizeThatFits(_ size: CGSize) -> CGSize {
         return .init(width: size.width, height: calculateContentHeight(layoutWidth: size.width) + contentInset.top + contentInset.bottom)
     }
 
@@ -314,46 +314,46 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open override func willMove(toSuperview newSuperview: UIView?) {
+    @objc open override func willMove(toSuperview newSuperview: UIView?) {
         super.willMove(toSuperview: newSuperview)
         tagViews.forEach { $0.setNeedsLayout() }
         repositionViews()
     }
 
-    open override func layoutSubviews() {
+    @objc open override func layoutSubviews() {
         super.layoutSubviews()
         repositionViews()
     }
 
     /// Take the text inside of the field and make it a Tag.
-    open func acceptCurrentTextAsTag() {
+    @objc open func acceptCurrentTextAsTag() {
         if let currentText = tokenizeTextFieldText(), !isTextFieldEmpty {
             self.addTag(currentText)
         }
     }
 
-    open var isEditing: Bool {
+    @objc open var isEditing: Bool {
         return self.textField.isEditing
     }
 
-    open func beginEditing() {
+    @objc open func beginEditing() {
         self.textField.becomeFirstResponder()
         self.unselectAllTagViewsAnimated(false)
     }
 
-    open func endEditing() {
+    @objc open func endEditing() {
         // NOTE: We used to check if .isFirstResponder and then resign first responder, but sometimes we noticed 
         // that it would be the first responder, but still return isFirstResponder=NO. 
         // So always attempt to resign without checking.
         self.textField.resignFirstResponder()
     }
 
-    open override func reloadInputViews() {
+    @objc open override func reloadInputViews() {
         self.textField.reloadInputViews()
     }
 
     // MARK: - Adding / Removing Tags
-    open func addTags(_ tags: [String]) {
+    @objc open func addTags(_ tags: [String]) {
         tags.forEach { addTag($0) }
     }
 
@@ -361,7 +361,7 @@ public struct WSTagAcceptOption: OptionSet {
         tags.forEach { addTag($0) }
     }
 
-    open func addTag(_ tag: String) {
+    @objc open func addTag(_ tag: String) {
         addTag(WSTag(tag))
     }
 
@@ -426,7 +426,7 @@ public struct WSTagAcceptOption: OptionSet {
         repositionViews()
     }
 
-    open func removeTag(_ tag: String) {
+    @objc open func removeTag(_ tag: String) {
         removeTag(WSTag(tag))
     }
 
@@ -436,7 +436,7 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open func removeTagAtIndex(_ index: Int) {
+    @objc open func removeTagAtIndex(_ index: Int) {
         if index < 0 || index >= self.tags.count { return }
 
         let tagView = self.tagViews[index]
@@ -451,7 +451,7 @@ public struct WSTagAcceptOption: OptionSet {
         repositionViews()
     }
 
-    open func removeTags() {
+    @objc open func removeTags() {
         self.tags.enumerated().reversed().forEach { index, _ in removeTagAtIndex(index) }
     }
 
@@ -478,7 +478,7 @@ public struct WSTagAcceptOption: OptionSet {
 
     // MARK: - Tag selection
 
-    open func selectNextTag() {
+    @objc open func selectNextTag() {
         guard let selectedIndex = tagViews.firstIndex(where: { $0.selected }) else {
             return
         }
@@ -493,7 +493,7 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open func selectPrevTag() {
+    @objc open func selectPrevTag() {
         guard let selectedIndex = tagViews.firstIndex(where: { $0.selected }) else {
             return
         }
@@ -505,7 +505,7 @@ public struct WSTagAcceptOption: OptionSet {
         }
     }
 
-    open func selectTagView(_ tagView: WSTagView, animated: Bool = false) {
+    @objc open func selectTagView(_ tagView: WSTagView, animated: Bool = false) {
         if self.readOnly {
             return
         }
@@ -524,7 +524,7 @@ public struct WSTagAcceptOption: OptionSet {
         onDidSelectTagView?(self, tagView)
     }
 
-    open func unselectAllTagViewsAnimated(_ animated: Bool = false) {
+    @objc open func unselectAllTagViewsAnimated(_ animated: Bool = false) {
         tagViews.forEach {
             $0.selected = false
             onDidUnselectTagView?(self, $0)
@@ -578,11 +578,11 @@ extension WSTagsField {
     }
 
     @available(*, deprecated, message: "Use 'inputFieldAccessoryView' instead")
-    override open var inputAccessoryView: UIView? {
+    @objc override open var inputAccessoryView: UIView? {
         return super.inputAccessoryView
     }
 
-    open var inputFieldAccessoryView: UIView? {
+    @objc open var inputFieldAccessoryView: UIView? {
         get { return textField.inputAccessoryView }
         set { textField.inputAccessoryView = newValue }
     }

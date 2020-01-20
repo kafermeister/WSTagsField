@@ -8,46 +8,46 @@
 
 import UIKit
 
-open class WSTagView: UIView, UITextInputTraits {
+@objc open class WSTagView: UIView, UITextInputTraits {
 
     fileprivate let textLabel = UILabel()
 
-    open var displayText: String = "" {
+    @objc open var displayText: String = "" {
         didSet {
             updateLabelText()
             setNeedsDisplay()
         }
     }
 
-    open var displayDelimiter: String = "" {
+    @objc open var displayDelimiter: String = "" {
         didSet {
             updateLabelText()
             setNeedsDisplay()
         }
     }
 
-    open var font: UIFont? {
+    @objc open var font: UIFont? {
         didSet {
             textLabel.font = font
             setNeedsDisplay()
         }
     }
 
-    open var cornerRadius: CGFloat = 3.0 {
+    @objc open var cornerRadius: CGFloat = 3.0 {
         didSet {
             self.layer.cornerRadius = cornerRadius
             setNeedsDisplay()
         }
     }
 
-    open var borderWidth: CGFloat = 0.0 {
+    @objc open var borderWidth: CGFloat = 0.0 {
         didSet {
             self.layer.borderWidth = borderWidth
             setNeedsDisplay()
         }
     }
 
-    open var borderColor: UIColor? {
+    @objc open var borderColor: UIColor? {
         didSet {
             if let borderColor = borderColor {
                 self.layer.borderColor = borderColor.cgColor
@@ -56,20 +56,20 @@ open class WSTagView: UIView, UITextInputTraits {
         }
     }
 
-    open override var tintColor: UIColor! {
+    @objc open override var tintColor: UIColor! {
         didSet { updateContent(animated: false) }
     }
 
     /// Background color to be used for selected state.
-    open var selectedColor: UIColor? {
+    @objc open var selectedColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
-    open var textColor: UIColor? {
+    @objc open var textColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
-    open var selectedTextColor: UIColor? {
+    @objc open var selectedTextColor: UIColor? {
         didSet { updateContent(animated: false) }
     }
 
@@ -77,7 +77,7 @@ open class WSTagView: UIView, UITextInputTraits {
     internal var onDidRequestSelection: ((_ tagView: WSTagView) -> Void)?
     internal var onDidInputText: ((_ tagView: WSTagView, _ text: String) -> Void)?
 
-    open var selected: Bool = false {
+    @objc open var selected: Bool = false {
         didSet {
             if selected && !isFirstResponder {
                 _ = becomeFirstResponder()
@@ -164,13 +164,13 @@ open class WSTagView: UIView, UITextInputTraits {
 
     // MARK: - Size Measurements
 
-    open override var intrinsicContentSize: CGSize {
+    @objc open override var intrinsicContentSize: CGSize {
         let labelIntrinsicSize = textLabel.intrinsicContentSize
         return CGSize(width: labelIntrinsicSize.width + layoutMargins.left + layoutMargins.right,
                       height: labelIntrinsicSize.height + layoutMargins.top + layoutMargins.bottom)
     }
 
-    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+    @objc open override func sizeThatFits(_ size: CGSize) -> CGSize {
         let layoutMarginsHorizontal = layoutMargins.left + layoutMargins.right
         let layoutMarginsVertical = layoutMargins.top + layoutMargins.bottom
         let fittingSize = CGSize(width: size.width - layoutMarginsHorizontal,
@@ -180,7 +180,7 @@ open class WSTagView: UIView, UITextInputTraits {
                       height: labelSize.height + layoutMarginsVertical)
     }
 
-    open func sizeToFit(_ size: CGSize) -> CGSize {
+    @objc open func sizeToFit(_ size: CGSize) -> CGSize {
         if intrinsicContentSize.width > size.width {
             return CGSize(width: size.width,
                           height: intrinsicContentSize.height)
@@ -198,7 +198,7 @@ open class WSTagView: UIView, UITextInputTraits {
     }
 
     // MARK: - Laying out
-    open override func layoutSubviews() {
+    @objc open override func layoutSubviews() {
         super.layoutSubviews()
         textLabel.frame = bounds.inset(by: layoutMargins)
         if frame.width == 0 || frame.height == 0 {
@@ -207,17 +207,17 @@ open class WSTagView: UIView, UITextInputTraits {
     }
 
     // MARK: - First Responder (needed to capture keyboard)
-    open override var canBecomeFirstResponder: Bool {
+    @objc open override var canBecomeFirstResponder: Bool {
         return true
     }
 
-    open override func becomeFirstResponder() -> Bool {
+    @objc open override func becomeFirstResponder() -> Bool {
         let didBecomeFirstResponder = super.becomeFirstResponder()
         selected = true
         return didBecomeFirstResponder
     }
 
-    open override func resignFirstResponder() -> Bool {
+    @objc open override func resignFirstResponder() -> Bool {
         let didResignFirstResponder = super.resignFirstResponder()
         selected = false
         return didResignFirstResponder
