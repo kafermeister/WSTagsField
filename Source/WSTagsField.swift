@@ -20,7 +20,7 @@ public struct WSTagAcceptOption: OptionSet {
     public static let  space   = WSTagAcceptOption(rawValue: 1 << 2)
 }
 
-open class WSTagsField: UIScrollView {
+@objc open class WSTagsField: UIScrollView {
 
     fileprivate let textField = BackspaceDetectingTextField()
 
